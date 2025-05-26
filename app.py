@@ -10,8 +10,6 @@ Original file is located at
 import os
 os.environ["TRANSFORMERS_NO_TF"] = "1"
 
-pip install streamlit pandas requests sentence_transformers transformers
-
 import streamlit as st
 SERP_API_KEY = st.secrets["SERP_API_KEY"]
 
