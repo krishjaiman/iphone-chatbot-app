@@ -1,9 +1,0 @@
-streamlit
-openai
-langchain
-beautifulsoup4
-requests
-serpapi
-tiktoken
-python-dotenv
-transformers
