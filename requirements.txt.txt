@@ -6,3 +6,4 @@ requests
 serpapi
 tiktoken
 python-dotenv
+transformers
