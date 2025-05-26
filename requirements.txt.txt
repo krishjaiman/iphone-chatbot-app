@@ -6,4 +6,4 @@ requests
 serpapi
 tiktoken
 python-dotenv
-transformers
+transformers>=4.0.0
