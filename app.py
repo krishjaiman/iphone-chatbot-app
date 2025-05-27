@@ -9,11 +9,9 @@ Original file is located at
 
 import os
 os.environ["TRANSFORMERS_NO_TF"] = "1"
+api_key = os.environ.get("SERP_API_KEY")
 
 import streamlit as st
-SERP_API_KEY = st.secrets["SERP_API_KEY"]
-
-
 import pandas as pd
 import requests
 from transformers import pipeline , AutoModelForCausalLM , AutoTokenizer
@@ -45,7 +43,7 @@ all_specs = [
 SPECS_DF = pd.DataFrame(all_specs)
 
 # Your SerpAPI key (replace with your real key or put in .streamlit/secrets.toml)
-SERP_API_KEY = SERP_API_KEY
+SERP_API_KEY = api_key
 
 # --- Helper Functions ---
 def identify_query_type(query):
@@ -74,8 +72,7 @@ def serpapi_search(query, api_key, num_results=3):
     params = {
         "engine": "duckduckgo",
         "q": query,
-        "api_key": api_key,
-        "num": num_results
+        "api_key": api_key
     }
     response = requests.get(url, params=params)
     results = []
@@ -107,8 +104,7 @@ user_query = st.text_input("Your question:")
 if st.button("Ask"):
     if user_query:
         with st.spinner("Thinking..."):
-            model = identify_model_semantic(user_query)
-            features = extract_features_semantic(user_query)
+            model, features = extract_model_and_feature(user_query)
             if not model:
                 st.error("Sorry, I couldn't identify which iPhone model you're asking about.")
             else:
